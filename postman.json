@@ -1,0 +1,69 @@
+{
+	"id": "f3abfdb9-3bf4-4ad3-85e0-04c09862046f",
+	"name": "Postman",
+	"values": [
+		{
+			"key": "baseUrl",
+			"value": "https://api-automacao.qacoders.dev.br/api",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "Token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGJmMTQyNDNmOGE3OGI5N2NkZjA3ZmYiLCJmdWxsTmFtZSI6IlFhLUNvZGVycy1TWVNBRE1JTiIsIm1haWwiOiJzeXNhZG1pbkBxYWNvZGVycy5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRIMVNtL2dlQlVGd1NVT2pDMFB6eFF1TlFLTkZ1S1RpOGtyRklzaHJ5THNCOFZPT01WdmRlLiIsImFjY2Vzc1Byb2ZpbGUiOiJTWVNBRE1JTiIsImNwZiI6IjExMTExMTExMTExIiwic3RhdHVzIjp0cnVlLCJhdWRpdCI6W3sicmVnaXN0ZXJlZEJ5Ijp7InVzZXJJZCI6IjExMTExMTExMTExMTExMTExMSIsInVzZXJMb2dpbiI6InN5c2FkbWluQHFhY29kZXJzLmNvbSJ9LCJyZWdpc3RyYXRpb25EYXRlIjoic2VndW5kYS1mZWlyYSwgMDgvMDkvMjAyNSwgMTQ6MzY6MzUgQlJUIiwicmVnaXN0cmF0aW9uTnVtYmVyIjoiMDEiLCJjb21wYW55SWQiOiJRYS5Db2RlcnMiLCJfaWQiOiI2OGJmMTQyNDNmOGE3OGI5N2NkZjA4MDAifV0sIl9fdiI6MCwiaWF0IjoxNzU3NDM3OTk2LCJleHAiOjE3NTc1MjQzOTZ9.UCV96MvC0HbyLsu7X_YoqPuDciJW_IZxZ1TxRSlgcpw",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "Count1",
+			"value": 17,
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "FistName",
+			"value": "Katina",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "LastName",
+			"value": "Ocassio",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "FullName",
+			"value": "Jhone Ocassio",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "FirstName",
+			"value": "Jhone",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ProviderMail",
+			"value": "@hotmail.com",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "Mail",
+			"value": "Jhone_cab00dd4-4dc5-4f3d-8db8-4e28bd714488@hotmail.com",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "CPF",
+			"value": "32810336873",
+			"type": "any",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2025-09-09T17:25:38.789Z",
+	"_postman_exported_using": "Postman/11.62.4"
+}

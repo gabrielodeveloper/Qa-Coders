@@ -1,0 +1,258 @@
+{
+	"info": {
+		"_postman_id": "3502ce84-06dc-4586-a43d-ac3aa18f6976",
+		"name": "01_Auth",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47161483",
+		"_collection_link": "https://research-participant-1272790-5836093.postman.co/workspace/QACoders~a8d5b897-86f5-4beb-b988-8ac0a87d3f52/collection/47161483-3502ce84-06dc-4586-a43d-ac3aa18f6976?action=share&source=collection_link&creator=47161483"
+	},
+	"item": [
+		{
+			"name": "happy_path",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status Code is 200\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"User ID is not empty\", function() {\r",
+									"    pm.expect(pm.response.json().user._id).to.not.be.empty;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Token is not empty\", function() {\r",
+									"    pm.expect(pm.response.json().token).to.not.be.empty;\r",
+									"});\r",
+									"\r",
+									"pm.environment.set(\"Token\", pm.response.json().token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"mail\": \"{{MailAdmin}}\",\r\n  \"password\": \"{{Password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate Token",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/validateToken",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"validateToken"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "exceptions",
+			"item": [
+				{
+					"name": "empty_login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status Code is 400\", function() {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate Mail is Required Msg\", function() {\r",
+									"    pm.expect(pm.response.json().mail).to.eql(pm.globals.get(\"MsgMailRequired\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate Mail is Required Msg\", function() {\r",
+									"    pm.expect(pm.response.json().password).to.eql(pm.globals.get(\"MsgPasswordRequired\"));\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"mail\": \"\",\r\n  \"password\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid_mail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status Code is 400\", function() {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate Data is Required Msg\", function() {\r",
+									"    pm.expect(pm.response.json().alert).to.eql(pm.globals.get(\"MsgInvalidData\"));\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"mail\": \"teste.teste.com.br\",\r\n  \"password\": \"{{Password}}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid_password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status Code is 400\", function() {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate Data is Required Msg\", function() {\r",
+									"    pm.expect(pm.response.json().alert).to.eql(pm.globals.get(\"MsgInvalidData\"));\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"mail\": \"{{MailAdmin}}\",\r\n  \"password\": \"asdlfkjasdf\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
