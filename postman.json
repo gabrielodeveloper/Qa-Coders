@@ -61,9 +61,51 @@
 			"value": "32810336873",
 			"type": "any",
 			"enabled": true
+		},
+		{
+			"key": "Count2",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "UserId",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "TokenUser",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "FullNameUpdate",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "MailUpdate",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "PasswordUpdate",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "MsgPasswordUpdate",
+			"value": "",
+			"type": "any",
+			"enabled": true
 		}
 	],
 	"_postman_variable_scope": "environment",
-	"_postman_exported_at": "2025-09-09T17:25:38.789Z",
+	"_postman_exported_at": "2025-09-11T18:51:42.568Z",
 	"_postman_exported_using": "Postman/11.62.4"
 }

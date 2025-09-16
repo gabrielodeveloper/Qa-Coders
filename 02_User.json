@@ -1,0 +1,283 @@
+{
+	"info": {
+		"_postman_id": "f657b623-992f-4569-961f-e54df85cb244",
+		"name": "02_User",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47161483",
+		"_collection_link": "https://research-participant-1272790-5836093.postman.co/workspace/QACoders~a8d5b897-86f5-4beb-b988-8ac0a87d3f52/collection/47161483-f657b623-992f-4569-961f-e54df85cb244?action=share&source=collection_link&creator=47161483"
+	},
+	"item": [
+		{
+			"name": "Dependencies",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status Code is 200\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"User ID is not empty\", function() {\r",
+									"    pm.expect(pm.response.json().user._id).to.not.be.empty;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Token is not empty\", function() {\r",
+									"    pm.expect(pm.response.json().token).to.not.be.empty;\r",
+									"});\r",
+									"\r",
+									"pm.environment.set(\"Token\", pm.response.json().token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"mail\": \"{{MailAdmin}}\",\r\n  \"password\": \"{{Password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Happy_path",
+			"item": [
+				{
+					"name": "User_count",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status Code is 200\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check count is not null\", function() {\r",
+									"    pm.expect(pm.response.json()).to.not.be.null\r",
+									"});\r",
+									"\r",
+									"pm.environment.set(\"Count1\", pm.response.json().count);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/user/count",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"count"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users_Create",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function firstName() {\r",
+									"    let firstName = [\"Gabriel\", \"Jhone\", \"Katina\", \"Gilmar\", \"Ueler\", \"Felipe\", \"Lucas\"];\r",
+									"\r",
+									"    let ramdomItem = firstName [Math.floor(Math.random() * firstName.length)];\r",
+									"\r",
+									"    return ramdomItem;\r",
+									"}\r",
+									"\r",
+									"pm.environment.set(\"FirstName\", firstName());\r",
+									"\r",
+									"function lastName() {\r",
+									"    let lastName = [\"Oliveira\", \"Moraes\", \"Bernerdo\", \"Ferro\", \"Ocassio\", \"Felipe\", \"Lucas\"];\r",
+									"\r",
+									"    let ramdomItem = lastName [Math.floor(Math.random() * lastName.length)];\r",
+									"\r",
+									"    return ramdomItem;\r",
+									"}\r",
+									"\r",
+									"pm.environment.set(\"LastName\", lastName());\r",
+									"\r",
+									"pm.environment.set(\"FullName\", pm.environment.get(\"FirstName\") + \" \" + pm.environment.get(\"LastName\"));\r",
+									"\r",
+									"function providerMail() {\r",
+									"    let provider = [\"@gmail.com\", \"@outlook.com\", \"@hotmail.com\"];\r",
+									"\r",
+									"    let ramdomItem = provider[Math.floor(Math.random() * provider.length)];\r",
+									"\r",
+									"    return ramdomItem;\r",
+									"}\r",
+									"\r",
+									"pm.environment.set(\"ProviderMail\", providerMail());\r",
+									"\r",
+									"pm.environment.set(\"Mail\",  pm.environment.get(\"FirstName\") + \"_\" + pm.variables.replaceIn('{{$guid}}') +  pm.environment.get(\"ProviderMail\"));\r",
+									"\r",
+									"function gerarCPF() {\r",
+									"    function random(n) {\r",
+									"        return Math.floor(Math.random() * n);\r",
+									"    }\r",
+									" \r",
+									"    function mod(dividendo, divisor) {\r",
+									"        return Math.round(dividendo - Math.floor(dividendo / divisor) * divisor);\r",
+									"    }\r",
+									" \r",
+									"    let n = [];\r",
+									"    for (let i = 0; i < 9; i++) {\r",
+									"        n[i] = random(9);\r",
+									"    }\r",
+									" \r",
+									"    let d1 = 0;\r",
+									"    for (let i = 0; i < 9; i++) {\r",
+									"        d1 += n[i] * (10 - i);\r",
+									"    }\r",
+									"    d1 = 11 - mod(d1, 11);\r",
+									"    if (d1 >= 10) d1 = 0;\r",
+									" \r",
+									"    let d2 = 0;\r",
+									"    for (let i = 0; i < 9; i++) {\r",
+									"        d2 += n[i] * (11 - i);\r",
+									"    }\r",
+									"    d2 += d1 * 2;\r",
+									"    d2 = 11 - mod(d2, 11);\r",
+									"    if (d2 >= 10) d2 = 0;\r",
+									" \r",
+									"    return `${n[0]}${n[1]}${n[2]}${n[3]}${n[4]}${n[5]}${n[6]}${n[7]}${n[8]}${d1}${d2}`;\r",
+									"}\r",
+									"\r",
+									"pm.environment.set(\"CPF\", gerarCPF());\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"fullName\": \"{{FullName}}\",\r\n  \"mail\": \"{{Mail}}\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"{{CPF}}\",\r\n  \"password\": \"{{Password}}\",\r\n  \"confirmPassword\": \"{{Password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "{{Token}}",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "Authorization",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

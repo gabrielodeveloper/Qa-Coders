@@ -30,10 +30,28 @@
 			"value": "E-mail ou senha informados são inválidos.",
 			"type": "default",
 			"enabled": true
+		},
+		{
+			"key": "AlterStatusSucess",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "MsgPasswordUpdate",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "MsgUserDelete",
+			"value": "",
+			"type": "default",
+			"enabled": true
 		}
 	],
 	"name": "Globals",
 	"_postman_variable_scope": "globals",
-	"_postman_exported_at": "2025-09-09T17:26:16.837Z",
+	"_postman_exported_at": "2025-09-11T18:52:00.298Z",
 	"_postman_exported_using": "Postman/11.62.4"
 }
